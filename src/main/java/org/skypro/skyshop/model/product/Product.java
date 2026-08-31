@@ -2,6 +2,7 @@ package org.skypro.skyshop.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.skypro.skyshop.model.search.Searchable;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,21 +19,30 @@ public abstract class Product implements Searchable {
     }
 
     @Override
-    public UUID getId() { return id; }
+    public UUID getId() {
+        return id;
+    }
 
     @Override
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public abstract int getPrice();
+
     public abstract boolean isSpecial();
 
     @Override
     @JsonIgnore
-    public String getSearchTerm() { return getName(); }
+    public String getSearchTerm() {
+        return getName();
+    }
 
     @Override
     @JsonIgnore
-    public String getContentType() { return "PRODUCT"; }
+    public String getContentType() {
+        return "PRODUCT";
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -43,5 +53,7 @@ public abstract class Product implements Searchable {
     }
 
     @Override
-    public int hashCode() { return Objects.hash(name); }
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
