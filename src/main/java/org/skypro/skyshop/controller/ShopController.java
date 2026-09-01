@@ -13,7 +13,6 @@ import java.util.Collection;
 
 @RestController
 public class ShopController {
-
     private final StorageService storageService;
     private final SearchService searchService;
 

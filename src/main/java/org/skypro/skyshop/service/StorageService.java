@@ -37,8 +37,13 @@ public class StorageService {
         articles.put(a2.getId(), a2);
     }
 
-    public Collection<Product> getAllProducts() { return products.values(); }
-    public Collection<Article> getAllArticles() { return articles.values(); }
+    public Collection<Product> getAllProducts() {
+        return products.values();
+    }
+
+    public Collection<Article> getAllArticles() {
+        return articles.values();
+    }
 
     // Метод для объединения, нужен для поиска
     public Collection<Searchable> getAllSearchables() {

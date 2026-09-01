@@ -1,4 +1,5 @@
 package org.skypro.skyshop.model.product;
+
 import java.util.UUID;
 
 public class SimpleProduct extends Product {
@@ -10,7 +11,18 @@ public class SimpleProduct extends Product {
         this.price = price;
     }
 
-    @Override public int getPrice() { return price; }
-    @Override public boolean isSpecial() { return false; }
-    @Override public String toString() { return getName() + ": " + getPrice(); }
+    @Override
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public boolean isSpecial() {
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + ": " + getPrice();
+    }
 }
