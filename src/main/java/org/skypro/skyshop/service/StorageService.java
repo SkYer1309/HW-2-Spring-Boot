@@ -7,6 +7,7 @@ import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.SimpleProduct;
 import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import java.util.*;
 
@@ -51,5 +52,8 @@ public class StorageService {
         all.addAll(products.values());
         all.addAll(articles.values());
         return all;
+    }
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(products.get(id));
     }
 }
