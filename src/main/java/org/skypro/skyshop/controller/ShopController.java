@@ -37,14 +37,12 @@ public class ShopController {
     }
 
 
-    // метод addProduct с путем /basket/{id} и PathVariable
     @GetMapping("/basket/{id}")
     public String addProduct(@PathVariable("id") UUID id) {
         basketService.addProductToBasket(id);
         return "Продукт успешно добавлен";
     }
 
-    // //////////метод getUserBasket с путем /basket
     @GetMapping("/basket")
     public UserBasket getUserBasket() {
         return basketService.getUserBasket();
