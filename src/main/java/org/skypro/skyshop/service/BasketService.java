@@ -5,6 +5,7 @@ import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
 import org.springframework.stereotype.Service;
+import org.skypro.skyshop.exception.NoSuchProductException;
 
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,9 @@ public class BasketService {
 
     // Метод добавления товара в корзину
     public void addProductToBasket(UUID id) {
-        // использован Optional с orElseThrow для проверки и выброса исключения
+        // выбрасывается NoSuchProductException в случае отсутствия товара
         Product product = storageService.getProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Товар с таким ID не найден"));
+                .orElseThrow(() -> new NoSuchProductException("Товар с ID " + id + " не найден"));
 
         productBasket.addProduct(id);
     }
@@ -36,15 +37,15 @@ public class BasketService {
     public UserBasket getUserBasket() {
         Map<UUID, Integer> basketMap = productBasket.getProducts();
 
-        // использован Stream API для преобразования мапы в список BasketItem
         List<BasketItem> items = basketMap.entrySet().stream()
                 .map(entry -> {
                     Product product = storageService.getProductById(entry.getKey())
-                            .orElseThrow(() -> new IllegalArgumentException("Товар не найден"));
+                            // Здесь тоже заменим на наше исключение для надежности
+                            .orElseThrow(() -> new NoSuchProductException("Товар с ID " + entry.getKey() + " не найден"));
                     return new BasketItem(product, entry.getValue());
                 })
                 .collect(Collectors.toList());
 
-        return new UserBasket(items); // total посчитается внутри конструктора UserBasket
+        return new UserBasket(items);
     }
 }
